@@ -1,3 +1,5 @@
+
+// create simpel hello component
 Vue.component("say", {
   props: ['message'],
   template: `
@@ -23,14 +25,23 @@ Vue.component('button-counter', {
 
 // create product component
 Vue.component("product", {
+  props: {
+    premium: {
+      type: String,
+      required: true
+    }
+  },
   template: `
     <div>
-      <h1>{{ title }}</h1>
       <h3>Cart ( {{ cart.length }} )</h3>
+      <h1>{{ title }}</h1>
+      Shipping: {{ shipping }}
+
       <img :src="image"
           alt="Green Sock"
           width="500px"
           height="500px">
+
 
       <div v-for="(image, index) in product.images"
           :key="image.id"
@@ -102,11 +113,20 @@ Vue.component("product", {
     },
     inStock() {
       return this.product.images[this.product.selectedIndex].quality > 0;
+    },
+    shipping() {
+      if (this.premium)
+        return "Free";
+
+      return "99.9$";
     }
   }
 });
 
 
 var app = new Vue({
-  el: "#app"
+  el: "#app",
+  data: {
+    premium: true
+  }
 });
