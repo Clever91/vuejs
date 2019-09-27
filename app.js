@@ -33,7 +33,6 @@ Vue.component("product", {
   },
   template: `
     <div>
-      <h3>Cart ( {{ cart.length }} )</h3>
       <h1>{{ title }}</h1>
       Shipping: {{ shipping }}
 
@@ -92,16 +91,14 @@ Vue.component("product", {
         ],
         selectedIndex: 0
       },
-      cart: [],
     }
   },
   methods: {
     updateProductImage(index, url) {
       this.product.selectedIndex = index;
-      console.log(this.product.selectedIndex);
     },
     addToCart(product) {
-      this.cart.push(product);
+      this.$emit("add-to-cart", product);
     }
   },
   computed: {
@@ -127,6 +124,13 @@ Vue.component("product", {
 var app = new Vue({
   el: "#app",
   data: {
-    premium: true
-  }
+    premium: true,
+    cart: [],
+  },
+  methods: {
+    updateCart(product) {
+      this.cart.push(product);
+      console.log(product);
+    }
+  },
 });

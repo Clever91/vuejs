@@ -12,9 +12,11 @@
 
       <say message="Hello World"></say>
 
-      <product :premium="!premium"></product>
-      <product :premium="premium"></product>
-      <product :premium="premium"></product>
+      <h3>Cart ( {{ cart.length }} )</h3>
+
+      <product :premium="!premium" @add-to-cart="updateCart($event)"></product>
+      <product :premium="premium" @add-to-cart="updateCart($event)"></product>
+      <product :premium="premium" @add-to-cart="updateCart($event)"></product>
 
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
